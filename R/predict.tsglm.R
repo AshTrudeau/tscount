@@ -3,6 +3,7 @@ predict.tsglm <- function(object, n.ahead=1, newobs=NULL, newxreg=NULL, level=0.
   newxreg <- if(is.null(newxreg)) matrix(0, nrow=n.ahead, ncol=ncol(object$xreg)) else as.matrix(newxreg)  #if no covariates are provided, these are set to zero
   stopifnot(n.ahead>0,
             n.ahead%%1==0,
+            # I can change this line to: length(newxreg)==ncol(object$xreg) for my purposes
             ncol(newxreg)==ncol(object$xreg)
   )
   n <- object$n_obs
