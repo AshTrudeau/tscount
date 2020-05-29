@@ -1,6 +1,7 @@
 predict.tsglm <- function(object, n.ahead=1, newobs=NULL, newxreg=NULL, level=0.95, global=FALSE, type=c("quantiles", "shortest", "onesided"), method=c("conddistr", "bootstrap"), B=1000, estim=c("ignore", "bootstrap", "normapprox", "given"), B_estim=B, coefs_given=NULL, ...){
   tsglm.check(object)
-  newxreg <- if(is.null(newxreg)) matrix(0, nrow=n.ahead, ncol=ncol(object$xreg)) else as.matrix(newxreg)  #if no covariates are provided, these are set to zero
+  # as.matrix is turning my rows into columns. Changed to matrix() with nrow=1
+  newxreg <- if(is.null(newxreg)) matrix(0, nrow=n.ahead, ncol=ncol(object$xreg)) else matrix(newxreg, nrow=1)  #if no covariates are provided, these are set to zero
   stopifnot(n.ahead>0,
             n.ahead%%1==0,
             # I can change this line to: length(newxreg)==ncol(object$xreg) for my purposes
