@@ -52,7 +52,8 @@ tsglm.sim <- function(n, param=list(intercept=1, past_obs=NULL, past_mean=NULL, 
   R <- seq(along=numeric(r)) #sequence 1:r if r>0 and NULL otherwise
   if(p==0 & q>0) warning("Without dependence on past observations the dependence on past values of the linear predictor has no effect. Choose the model wisely.")
   stopifnot(
-    nrow(xreg)==n,
+    # commenting this out so I can use bootstrap method while looping one step ahead predictions
+    #nrow(xreg)==n,
     length(model$external)%in%c(r, 1, 0)
   )
   model$external <- as.logical(model$external)
