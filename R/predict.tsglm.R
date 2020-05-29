@@ -4,7 +4,7 @@ predict.tsglm <- function(object, n.ahead=1, newobs=NULL, newxreg=NULL, level=0.
   stopifnot(n.ahead>0,
             n.ahead%%1==0,
             # I can change this line to: length(newxreg)==ncol(object$xreg) for my purposes
-            ncol(newxreg)==ncol(object$xreg)
+            length(newxreg)==ncol(object$xreg)
   )
   n <- object$n_obs
   link <- object$link
